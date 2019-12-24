@@ -3,8 +3,6 @@
 # Application Listeners
 
 # Run Listeners
-org.springframework.boot.SpringApplicationRunListener=\
-com.bstek.microService.dorado.DoradoPreloadSpringApplicationRunListener
 
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\

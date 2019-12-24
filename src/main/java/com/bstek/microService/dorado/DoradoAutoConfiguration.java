@@ -36,18 +36,6 @@ public class DoradoAutoConfiguration extends ApplicationContextConfiguration imp
 	@Autowired
 	private ResourceProperties resourceProperties;
 
-	
-	/*
-	@Bean
-	@SuppressWarnings("unchecked")
-    public ServletRegistrationBean<DoradoServlet> doradoServletRegistrationBean() {
-		ServletRegistrationBean<DoradoServlet> servletRegistrationBean = new ServletRegistrationBean<DoradoServlet>(new DoradoServlet(), "*.d", "*.dpkg", "/dorado/*");
-		//ServletRegistrationBean<DoradoServlet> servletRegistrationBean = doradoApplicationContextConfiguration.doradoServletRegistration();
-		servletRegistrationBean.setLoadOnStartup(1);
-		return servletRegistrationBean;
-    }
-	*/
-	
 	@Bean
 	public FilterRegistrationBean<Filter> someFilterRegistration() {
 
