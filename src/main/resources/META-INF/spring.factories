@@ -6,4 +6,4 @@
 
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.bstek.microService.dorado.DoradoAutoConfiguration
+com.bstek.dorado.web.boot.ApplicationContextConfiguration

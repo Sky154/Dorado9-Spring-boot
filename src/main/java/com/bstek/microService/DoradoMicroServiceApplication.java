@@ -9,9 +9,9 @@ import com.bstek.dorado.web.boot.DoradoApplicationInitlizalizer;
 public class DoradoMicroServiceApplication {
 
 	public static void main(String[] args) {
-		System.out.println("**************************");
-		System.out.println("     Dorado9 微服务示例     ");
-		System.out.println("**************************");
+		System.out.println("****************************");
+		System.out.println("*     Dorado9 微服务示例     *");
+		System.out.println("****************************");
 		SpringApplication app = new SpringApplication(DoradoMicroServiceApplication.class);
 		DoradoApplicationInitlizalizer initlizalizer = new DoradoApplicationInitlizalizer();
 		try {
