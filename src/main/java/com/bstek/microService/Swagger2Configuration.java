@@ -40,7 +40,7 @@ public class Swagger2Configuration {
 				.description(DESCRIPTION) // 设置文档的描述
 				.version(VERSION) // 设置文档的版本信息-> 1.0.0 Version information
 				.termsOfServiceUrl(termsOfServiceUrl) // 服务条款网址
-				.contact(new Contact("Sky.Zhang", "http://wwww.bstek.com", "sky.zhang@bstek.com"))//联系人信息
+				.contact(new Contact("Sky", "http://wwww.bstek.com", "sky.zhang@bstek.com"))//联系人信息
 				.build();
 	}
 
