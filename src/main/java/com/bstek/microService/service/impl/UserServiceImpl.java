@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUser() {
 		return userDao.getAllUser();
 	}
+	
+	@Override
+	public List<User> selectByUserName(String name) {
+		return userDao.selectByUserName(name);
+	}
 
 	@Override
 	public void addUser(User user) {
@@ -49,5 +54,4 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 	}
-
 }

@@ -19,6 +19,13 @@ public interface UserService {
 	List<User> getAllUser();
 	
 	/**
+	 * 根据用户姓名获取所有用户信息
+	 * @param name 用户姓名
+	 * @return 用户信息集
+	 */
+	List<User> selectByUserName(String name);
+	
+	/**
 	 * 新增用户信息
 	 * @param user 用户信息
 	 */
@@ -37,5 +44,4 @@ public interface UserService {
 	 * @return true-更新成功</br>false-更新失败
 	 */
 	boolean deleteById(int id);
-
 }

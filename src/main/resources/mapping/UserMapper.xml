@@ -50,7 +50,7 @@
 	<select id="selectByUserName" parameterType="java.lang.String" resultMap="User">
 		SELECT <include refid="Base_Column_List" />
 		FROM user AS t
-		WHERE t.name = #{name}
+		WHERE t.name like CONCAT(CONCAT('%', #{name}), '%')
 	</select>
 
 	<select id="fselectById" parameterType="java.lang.Integer" resultMap="User">

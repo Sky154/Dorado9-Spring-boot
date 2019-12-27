@@ -25,14 +25,18 @@ public class UserController {
 	private UserService userService;
 	
 	@DataProvider
-	public List<User> getAllUser() {
-		return userService.getAllUser();
+	public List<User> getAllUser(Map<String,Object> parameter) {
+		if(parameter != null && parameter.size() > 0) {
+			return userService.selectByUserName((String)parameter.get("name"));
+		}else {
+			return userService.getAllUser();
+		}
 	}
 	
 	@DataResolver
 	public Map<String,Object> saveUser(List<User> userlist, Map<String,Object> parameter) {
 		Map<String,Object> mapResult = new HashMap<String,Object>();
-		if(!userlist.isEmpty() && userlist.size() > 0 ) {
+		if(userlist != null && userlist.size() > 0 ) {
 			try {
 				for(User user : userlist) {
 					EntityState state = EntityUtils.getState(user);

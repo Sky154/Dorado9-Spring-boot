@@ -89,6 +89,11 @@ if(dsDatas &amp;&amp; dsDatas.entityCount > 0){
           <Property name="iconClass">fa fa-pencil</Property>
           <Property name="caption">修改</Property>
         </ToolBarButton>
+        <Separator/>
+        <TextEditor id="textEditorQuery">
+          <Property name="blankText">请输入姓名查找</Property>
+          <Property name="trigger">trigger</Property>
+        </TextEditor>
       </ToolBar>
       <DataGrid id="dataGrid">
         <Property name="dataSet">dsUser</Property>
@@ -194,5 +199,11 @@ view.get(&quot;#dsUser&quot;).getData(&quot;#&quot;).cancel();</ClientEvent>
         <Property name="dataSet">dsUser</Property>
       </UpdateItem>
     </UpdateAction>
+    <Trigger id="trigger">
+      <ClientEvent name="onExecute">view.get(&quot;#dsUser&quot;).set(&quot;parameter&quot;,{
+ name:view.get(&quot;#textEditorQuery&quot;).get(&quot;text&quot;)
+}).flushAsync();</ClientEvent>
+      <Property name="iconClass">fa fa-search</Property>
+    </Trigger>
   </View>
 </ViewConfig>
