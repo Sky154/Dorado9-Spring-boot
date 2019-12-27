@@ -19,7 +19,7 @@ public class Swagger2Configuration {
 	// API接口包扫描路径
 	public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.bstek.microService";
 	// 版本号
-	public static final String VERSION = "0.0.1";
+	public static final String VERSION = "0.0.2";
 	// 设置文档的标题
 	public static final String TITLE = "Doardo9 微服务示例";
 	// 设置文档的描述

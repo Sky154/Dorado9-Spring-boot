@@ -3,7 +3,84 @@
   <Arguments/>
   <Context/>
   <Model>
-    <DataType name="dataType1"/>
+    <DataType name="dtUser">
+      <Property name="creationType">com.bstek.microService.dbandcache.model.User</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">Long</Property>
+        <Property name="label">用户ID</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+        <Property name="label">姓名</Property>
+      </PropertyDef>
+      <PropertyDef name="age">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">年龄</Property>
+      </PropertyDef>
+      <PropertyDef name="email">
+        <Property></Property>
+        <Property name="label">邮箱</Property>
+      </PropertyDef>
+      <PropertyDef name="job">
+        <Property></Property>
+        <Property name="label">职务</Property>
+      </PropertyDef>
+      <PropertyDef name="department">
+        <Property></Property>
+        <Property name="label">部门</Property>
+      </PropertyDef>
+    </DataType>
   </Model>
-  <View/>
+  <View>
+    <Property name="title">用户信息</Property>
+    <Property name="packages">font-awesome</Property>
+    <DataSet id="dsUser">
+      <Property name="dataType">[dtUser]</Property>
+      <Property name="dataProvider">userController#getAllUser</Property>
+    </DataSet>
+    <Container>
+      <ToolBar>
+        <ToolBarButton id="btnAdd">
+          <Property name="caption">新增</Property>
+          <Property name="iconClass">fa fa-plus</Property>
+        </ToolBarButton>
+        <ToolBarButton id="btnDelete">
+          <Property name="caption">删除</Property>
+          <Property name="iconClass">fa fa-minus</Property>
+        </ToolBarButton>
+        <ToolBarButton id="btnUpdate">
+          <Property name="iconClass">fa fa-pencil</Property>
+          <Property name="caption">修改</Property>
+        </ToolBarButton>
+      </ToolBar>
+      <DataGrid>
+        <Property name="dataSet">dsUser</Property>
+        <Property name="readOnly">true</Property>
+        <RowNumColumn/>
+        <RowSelectorColumn/>
+        <DataColumn name="id">
+          <Property name="property">id</Property>
+        </DataColumn>
+        <DataColumn name="department">
+          <Property name="property">department</Property>
+        </DataColumn>
+        <DataColumn name="name">
+          <Property name="property">name</Property>
+        </DataColumn>
+        <DataColumn name="age">
+          <Property name="property">age</Property>
+        </DataColumn>
+        <DataColumn name="email">
+          <Property name="property">email</Property>
+        </DataColumn>
+        <DataColumn name="job">
+          <Property name="property">job</Property>
+        </DataColumn>
+      </DataGrid>
+      <DataPilot layoutConstraint="bottom">
+        <Property name="itemCodes">pages</Property>
+        <Property name="dataSet">dsUser</Property>
+      </DataPilot>
+    </Container>
+  </View>
 </ViewConfig>

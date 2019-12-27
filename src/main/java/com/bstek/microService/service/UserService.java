@@ -2,11 +2,12 @@ package com.bstek.microService.service;
 
 import java.util.List;
 
-import com.bstek.microService.entity.User;
+import com.bstek.microService.dbandcache.model.User;
+
 
 /**
-* @author Sky<br/>
-* @Description 用户信息维护接口类
+* 用户信息维护接口类
+* @author Sky
 **/
 public interface UserService {
 	
@@ -15,7 +16,7 @@ public interface UserService {
 	 * 获取所有用户信息
 	 * @return 用户信息集
 	 */
-	List<User> getUser();
+	List<User> getAllUser();
 	
 	/**
 	 * 新增用户信息

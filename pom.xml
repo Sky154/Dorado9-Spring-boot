@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bstek.microService</groupId>
 	<artifactId>DoradoMicroService</artifactId>
@@ -36,27 +37,56 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-	<!-- 引入 dorado 依赖 -->
+		<!-- 引入与数据库操作相关的依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- 引入lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 引入mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<!-- 引入阿里巴巴数据源 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.21</version>
+		</dependency>
+		<!-- 引入H2数据库 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- 引入dorado -->
 		<dependency>
 			<groupId>com.bstek.dorado</groupId>
 			<artifactId>dorado-core</artifactId>
 			<version>LATEST</version>
 		</dependency>
-		
- 	<!-- 引入 swagger2 依赖 -->
-    <dependency>
-       <groupId>io.springfox</groupId>
-       <artifactId>springfox-swagger2</artifactId>
-       <version>2.9.2</version>
-    </dependency>
-    <!-- 引入 swagger2 UI 依赖 -->
-    <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger-ui</artifactId>
-        <version>2.9.2</version>
-    </dependency>
-		
+
+		<!-- 引入swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<!-- 引入 swagger2 UI 依赖 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -70,10 +100,10 @@
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
-					  <include>**/*.xml</include>
-					  <include>**/*.properties</include>
-				 </includes>
-				 <filtering>true</filtering>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+				<filtering>true</filtering>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -89,5 +119,5 @@
 			<url>http://nexus.bsdn.org/content/groups/public/</url>
 		</repository>
 	</repositories>
-	
+
 </project>

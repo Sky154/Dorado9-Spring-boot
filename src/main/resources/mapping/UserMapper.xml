@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bstek.microService.dbandcache.mapper.UserMapper">
+	<resultMap id="User" type="com.bstek.microService.dbandcache.model.User" >
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+	    <result column="age" property="age" />
+	    <result column="email" property="email" />
+		<result column="job" property="job" />
+		<result column="department" property="department" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		t.id,
+		t.name,
+		t.age,
+		t.email,
+		t.job,
+		department
+	</sql>
+	
+	<insert id="insert" parameterType="com.bstek.microService.dbandcache.model.User" useGeneratedKeys="false" keyProperty="id" >
+		INSERT INTO user (
+			id, name, age, email, job, department
+		) VALUES (
+			#{id},
+			#{name},
+			#{age},
+			#{email},
+			#{job},
+			#{department}
+		);
+	</insert>
+
+	<update id="update" parameterType="com.bstek.microService.dbandcache.model.User" >
+		UPDATE user
+		SET
+			name = #{name},
+			age = #{age},
+			email = #{email},
+			job = #{job},
+			department = #{department}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.String" >
+		DELETE FROM user
+		WHERE id = #{id}
+	</delete>
+
+	<select id="selectByUserName" parameterType="java.lang.String" resultMap="User">
+		SELECT <include refid="Base_Column_List" />
+		FROM user AS t
+		WHERE t.name = #{name}
+	</select>
+
+	<select id="fselectById" parameterType="java.lang.String" resultMap="User">
+		SELECT <include refid="Base_Column_List" />
+		FROM user AS t
+		WHERE t.id = #{id}
+	</select>
+
+	<select id="getAllUser" parameterType="java.lang.String" resultMap="User">
+		SELECT <include refid="Base_Column_List" />
+		FROM user AS t
+		ORDER BY id DESC
+	</select>
+
+	<select id="pageList" parameterType="java.util.Map" resultMap="User">
+		SELECT <include refid="Base_Column_List" />
+		FROM user AS t
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="name != null and name != ''">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+		</trim>
+		ORDER BY t.name ASC
+		LIMIT #{offset}, #{pagesize}
+	</select>
+
+	<select id="pageListCount" parameterType="java.util.Map" resultType="int">
+		SELECT count(1)
+		FROM user AS t
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="name != null and name != ''">
+				AND t.userName like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+		</trim>
+	</select>
+</mapper>
