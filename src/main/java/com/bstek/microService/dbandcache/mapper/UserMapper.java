@@ -27,7 +27,7 @@ public interface UserMapper {
 	 * @param id 用户ID
 	 * @return 用户信息
 	 */
-	User selectById(@Param("id") String id);
+	User selectById(@Param("id") int id);
 
     /**
      * 根据用户名获取用户信息
@@ -55,7 +55,7 @@ public interface UserMapper {
 	 * @param id 用户ID
 	 * @return 删除记录数
 	 */
-	int deleteById(@Param("id") String id);
+	int deleteById(@Param("id") int id);
 	
 
      /**

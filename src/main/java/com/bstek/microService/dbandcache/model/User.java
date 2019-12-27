@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class User {
 	/**用户ID*/
-    private Long id;
+    private int id;
     /**姓名*/
     private String name;
     /**年龄*/

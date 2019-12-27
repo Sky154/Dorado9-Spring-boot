@@ -31,7 +31,7 @@ public class UserDao {
 	 * @param id 用户ID
 	 * @return 用户信息
 	 */
-	public User selectById(String id){
+	public User selectById(int id){
 		return userMapper.selectById(id);
 	}
 
@@ -67,7 +67,7 @@ public class UserDao {
 	 * @param id 用户ID
 	 * @return 删除记录数
 	 */
-	public int deleteById(String id){
+	public int deleteById(int id){
 		return userMapper.deleteById(id);
 	}
 	

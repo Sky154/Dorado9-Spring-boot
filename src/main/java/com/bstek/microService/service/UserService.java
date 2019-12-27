@@ -36,6 +36,6 @@ public interface UserService {
 	 * @param id 用户ID
 	 * @return true-更新成功</br>false-更新失败
 	 */
-	boolean deleteById(String id);
+	boolean deleteById(int id);
 
 }

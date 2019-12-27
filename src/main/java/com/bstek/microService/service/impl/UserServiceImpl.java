@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean deleteById(String id) {
+	public boolean deleteById(int id) {
 		int rownum = userDao.deleteById(id);
 		if(rownum > 0) {
 			return true;

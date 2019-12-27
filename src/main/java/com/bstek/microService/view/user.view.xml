@@ -8,26 +8,36 @@
       <PropertyDef name="id">
         <Property name="dataType">Long</Property>
         <Property name="label">用户ID</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
       <PropertyDef name="name">
         <Property></Property>
         <Property name="label">姓名</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
       <PropertyDef name="age">
         <Property name="dataType">Integer</Property>
         <Property name="label">年龄</Property>
+        <Property name="readOnly">false</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
       <PropertyDef name="email">
         <Property></Property>
         <Property name="label">邮箱</Property>
+        <Property name="readOnly">false</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
       <PropertyDef name="job">
         <Property></Property>
         <Property name="label">职务</Property>
+        <Property name="readOnly">false</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
       <PropertyDef name="department">
         <Property></Property>
         <Property name="label">部门</Property>
+        <Property name="readOnly">false</Property>
+        <Property name="required">true</Property>
       </PropertyDef>
     </DataType>
   </Model>
@@ -41,21 +51,49 @@
     <Container>
       <ToolBar>
         <ToolBarButton id="btnAdd">
+          <ClientEvent name="onClick">view.get(&quot;#dialog&quot;).show();
+view.get(&quot;#dsUser&quot;).insert();</ClientEvent>
           <Property name="caption">新增</Property>
           <Property name="iconClass">fa fa-plus</Property>
         </ToolBarButton>
         <ToolBarButton id="btnDelete">
+          <ClientEvent name="onClick">var dsDatas = view.get(&quot;#dsUser&quot;).getData();
+if(dsDatas &amp;&amp; dsDatas.entityCount > 0){
+	var datas = view.get(&quot;#dataGrid&quot;).get(&quot;selection&quot;);
+	if(datas &amp;&amp; datas.length > 0){
+		dorado.MessageBox.confirm(&quot;是否要确定删除选中的用户信息&quot;,function(){
+			datas.each(function(data){
+				data.remove();
+			});
+				view.get(&quot;#updateAction&quot;).execute(function(resultMessage){
+				dorado.MessageBox.alert(resultMessage.message);
+			});
+		});
+	}else{
+		dorado.MessageBox.alert(&quot;请先选择要删除的用户信息！&quot;);
+	}
+}else{
+	dorado.MessageBox.alert(&quot;尚无用户信息可删除！&quot;);
+}
+</ClientEvent>
           <Property name="caption">删除</Property>
           <Property name="iconClass">fa fa-minus</Property>
         </ToolBarButton>
         <ToolBarButton id="btnUpdate">
+          <ClientEvent name="onClick">var dsDatas = view.get(&quot;#dsUser&quot;).getData();
+if(dsDatas &amp;&amp; dsDatas.entityCount > 0){
+	view.get(&quot;#dialog&quot;).show();
+}else{
+	dorado.MessageBox.alert(&quot;尚无用户信息可修改！&quot;);
+}</ClientEvent>
           <Property name="iconClass">fa fa-pencil</Property>
           <Property name="caption">修改</Property>
         </ToolBarButton>
       </ToolBar>
-      <DataGrid>
+      <DataGrid id="dataGrid">
         <Property name="dataSet">dsUser</Property>
         <Property name="readOnly">true</Property>
+        <Property name="selectionMode">multiRows</Property>
         <RowNumColumn/>
         <RowSelectorColumn/>
         <DataColumn name="id">
@@ -82,5 +120,79 @@
         <Property name="dataSet">dsUser</Property>
       </DataPilot>
     </Container>
+    <Dialog id="dialog">
+      <Property name="closeable">false</Property>
+      <Property name="iconClass">fa fa-address-card-o</Property>
+      <Property name="caption">用户信息维护</Property>
+      <Property name="width">680</Property>
+      <Property name="height">250</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">dorado.MessageBox.confirm(&quot;是否要提交当前修改的用户信息？&quot;,function(){
+	view.get(&quot;#updateAction&quot;).execute(function(resultMessage){
+		if(resultMessage.result){
+			dorado.MessageBox.alert(resultMessage.message,function(){
+				view.get(&quot;#dialog&quot;).hide();
+			});
+		}else{
+			dorado.MessageBox.alert(resultMessage.message);
+		}
+	});
+});</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">view.get(&quot;#dialog&quot;).hide();
+view.get(&quot;#dsUser&quot;).getData(&quot;#&quot;).cancel();</ClientEvent>
+          <Property name="caption">取消</Property>
+          <Property name="iconClass">fa fa-close</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="cols">*,*</Property>
+          <Property name="dataSet">dsUser</Property>
+          <Property name="labelAlign">right</Property>
+          <AutoFormElement>
+            <Property name="name">id</Property>
+            <Property name="property">id</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">name</Property>
+            <Property name="property">name</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">age</Property>
+            <Property name="property">age</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">email</Property>
+            <Property name="property">email</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">job</Property>
+            <Property name="property">job</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">department</Property>
+            <Property name="property">department</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <UpdateAction id="updateAction">
+      <Property name="dataResolver">userController#saveUser</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsUser</Property>
+      </UpdateItem>
+    </UpdateAction>
   </View>
 </ViewConfig>
