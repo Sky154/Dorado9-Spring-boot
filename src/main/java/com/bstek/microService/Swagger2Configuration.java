@@ -1,5 +1,6 @@
 package com.bstek.microService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,30 +18,51 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Configuration {
 
 	// API接口包扫描路径
-	public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.bstek.microService";
+	@Value("${swagger.base-package}")
+	private String swagger_scan_base_package;
 	// 版本号
-	public static final String VERSION = "0.0.2";
+	@Value("${swagger.version}")
+	private String version;
 	// 设置文档的标题
-	public static final String TITLE = "Doardo9 微服务示例";
+	@Value("${swagger.title}")
+	private String title;
 	// 设置文档的描述
-	public static final String DESCRIPTION = "Doardo9 微服务示例 API 接口文档";
+	@Value("${swagger.description}")
+	private String description;
+	//许可证
+	@Value("${swagger.license}")
+	private String license;
+	//许可证URL
+	@Value("${swagger.licenseUrl}")
+	private String licenseUrl;
 	// 服务条款网址
-	public static final String termsOfServiceUrl = "http://www.bstek.com";
+	@Value("${swagger.termsOfServiceUrl}")
+	private String termsOfServiceUrl;
+	// 服务条款网址
+	@Value("${swagger.contact.name}")
+	private String contact_name;
+	// 服务条款网址
+	@Value("${swagger.contact.url}")
+	private String contact_url;
+	// 服务条款网址
+	@Value("${swagger.contact.email}")
+	private String contact_email;
 
 	@Bean
 	public Docket createRestApi() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
-				.paths(PathSelectors.any()) // 可以根据url路径设置哪些请求加入文档，忽略哪些请求
+				.apis(RequestHandlerSelectors.basePackage(swagger_scan_base_package)).paths(PathSelectors.any()) // 可以根据url路径设置哪些请求加入文档，忽略哪些请求
 				.build();
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title(TITLE) // 设置文档的标题
-				.description(DESCRIPTION) // 设置文档的描述
-				.version(VERSION) // 设置文档的版本信息-> 1.0.0 Version information
+		return new ApiInfoBuilder().title(title) // 设置文档的标题
+				.description(description) // 设置文档的描述
+				.version(version) // 设置文档的版本信息-> 1.0.0 Version information
+				.license(license) //许可证
+				.licenseUrl(licenseUrl) //许可证URL
 				.termsOfServiceUrl(termsOfServiceUrl) // 服务条款网址
-				.contact(new Contact("Sky", "http://wwww.bstek.com", "sky.zhang@bstek.com"))//联系人信息
+				.contact(new Contact(contact_name, contact_url, contact_email))// 联系人信息
 				.build();
 	}
 
